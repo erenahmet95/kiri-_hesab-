@@ -1,0 +1,95 @@
+def donatı_hesaplama(As):
+
+    import donatı_oranı
+    import math as mp
+
+    başlangıç_donatısı=6
+
+
+    bw=250
+    d=360
+    pas_payi=40
+    while True:
+
+        while başlangıç_donatısı<30:
+            başlangıç_donatısı += 2
+
+
+            donatı_adeti = As / (0.25 * mp.pi * başlangıç_donatısı ** 2)
+            donatı_adeti = mp.ceil(donatı_adeti)
+            print("Önerilen Donatı Çapı = ", başlangıç_donatısı)
+            print("Donatı Adeti = ", donatı_adeti)
+            if donatı_adeti < 3:
+                print("Donatı Adeti 3 Den Küçük Olduğu için Donatı Çapı Azaltılacak")
+                başlangıç_donatısı -= 2
+                print("Yeni Önerilen Donatı Çapı= ", başlangıç_donatısı)
+            donatı_alanı = 0.25 * mp.pi * başlangıç_donatısı ** 2 * donatı_adeti
+            ilk_donatı_oranı = (donatı_alanı / (bw * d))
+            oran = donatı_oranı.donatı_oranı(ilk_donatı_oranı)
+
+            if başlangıç_donatısı>20 :
+
+                tuş=input("Donatı Ekonomik Olmadığı İçin Program Duraklatıldı Devam Etmek istiyorsanız q ya basın")
+                if tuş == "q":
+                    continue
+            if başlangıç_donatısı >= 28:
+                print("Gerekli Koşullar Sağlanamamıştır Çift Donatılı Kesit Hesabı Yapın Ya da Kesitleri Büyütün")
+                break
+            if oran != None:
+                break
+        min_donatı_aralığı = 25
+        min_donatı2 = başlangıç_donatısı
+        ##min_donatı3=pass
+        faydalı_mesafe = bw - 2 * pas_payi
+        donatı_aralığı = max(min_donatı_aralığı, min_donatı2)
+        print("Seçlien Donatı Aralığı = ", donatı_aralığı, "mm")
+        donatı_sıralaması = []
+        sıra1 = (faydalı_mesafe // donatı_aralığı)
+
+        if donatı_adeti < sıra1:
+            donatı_sıralaması.append(donatı_adeti)
+
+            print("""
+            ---------------------------------------------------------------------------------------    
+
+                                            Donatı Düzeni :
+
+                                            1. Sıra Donatısı Adeti {}         
+
+
+            -----------------------------------------------------------------------------------------""".format(donatı_sıralaması[0]))
+
+            break
+
+        else:
+            sıra2 = donatı_adeti - sıra1
+            donatı_sıralaması.append(sıra1)
+            donatı_sıralaması.append(sıra2)
+            sıra3=sıra2-sıra1
+            print("""              -----------------------------------------------------------------------
+
+
+                                                        Donatı Düzeni :
+
+                                                        1. Sıra Donatısı Adeti {}
+                                                        2. Sıra Donatısı Adeti {}   
+
+
+
+
+            -------------------------------------------------------------------------------""".format(donatı_sıralaması[0], donatı_sıralaması[1]))
+            if sıra3 > 0:
+
+
+                print("""
+                
+                                            .....İşlem Devam Ediyor......
+                
+                """)
+
+        if başlangıç_donatısı >30:
+            break
+
+
+
+
