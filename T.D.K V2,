@@ -1,0 +1,125 @@
+import math as mp
+import numpy as np
+class c16():
+    fck = 16 / 1.5
+    fctd = 1.4 / 1.5
+    ec = 27000
+    k1 = 0.85
+
+
+class c18():
+    fck = 18 / 1.5
+    fctd = 1.5 / 1.5
+    ec = 27500
+    k1 = 0.85
+
+
+class c20():
+    fck = 20 / 1.5
+    fctd = 1.6 / 1.5
+    ec = 28000
+    k1 = 0.85
+
+
+class c25():
+    fck = 25 / 1.5
+    fctd = 1.8 / 1.5
+    ec = 30000
+    k1 = 0.85
+
+
+class c30():
+    fck = 30 / 1.5
+    fctd = 1.9
+    ec = 32000
+    k1 = 0.82
+
+
+class c35():
+    fck = 35 / 1.5
+    fctd = 2.1 / 1.5
+    ec = 33000
+    k1 = 0.79
+
+
+class c40():
+    fck = 40 / 1.5
+    fctd = 2.2 / 1.5
+    ec = 34000
+    k1 = 0.76
+
+
+class s220():
+    fyd = 220 / 1.15
+
+
+class s420():
+    fyd = 420 / 1.15
+
+
+print("""
+
+
+Bütün Birimler MM Cinsindendir.
+Beton Sınıfları;
+C16 ,C20 , C25 , C30 , C35 , C40 , C45 
+""")
+bw = int(input("Kiriş Genişliğini Giriniz"))
+hf = int(input("Kiriş Yüksekliğini Giriniz"))
+pas_payi = int(input("Pas Payı Miktarını Giriniz"))
+tasarım_momenti = int(input("Tasarım Moment Değerini Giriniz Kn.M"))
+d = hf - pas_payi
+beton_sınıfı = input("Beton Sınfını Giriniz")
+beton_sınıfı = beton_sınıfı.lower()
+if beton_sınıfı == "c16":
+    fctd = c16.fctd
+    fcd = c16.fck
+    k1 = c16.k1
+    ec = c16.ec
+elif beton_sınıfı == "c18":
+    fctd = c18.fctd
+    fcd = c18.fck
+    k1 = c18.k1
+    ec = c18.ec
+elif beton_sınıfı == "c20":
+    fctd = c20.fctd
+    fcd = c20.fck
+    k1 = c20.k1
+    ec = c20.ec
+elif beton_sınıfı == "c25":
+    fctd = c25.fctd
+    fcd = c25.fck
+    k1 = c25.k1
+    ec = c25.ec
+elif beton_sınıfı == "c30":
+    fctd = c30.fctd
+    fcd = c30.fck
+    k1 = c30.k1
+    ec = c30.ec
+else:
+
+    print("Geçerli Bir Beton Sınıfı Girmediniz")
+
+çelik_sınıfı = input("Çelik Sınıfını Giriniz")
+çelik_sınıfı = çelik_sınıfı.lower()
+if çelik_sınıfı == "s420":
+    fyd = s420.fyd
+elif çelik_sınıfı == "s220":
+    fyd = s220.fyd
+Md = tasarım_momenti * 10 ** 6
+a = d - np.sqrt(d ** 2 - (2 * Md) / (0.85 * fcd * bw))  #### Basınç Blogu Yüksekliği
+print("Basınç Bloğu Yüksekliği ", a)
+if a < hf:
+
+    As = Md / (fyd * (d - a * 0.5))  #### Donatı Oranı
+    print("Gerekli Donatı Oranı ", As)
+    import donatı
+    donatı.donatı(As,bw,d,pas_payi)
+
+
+
+
+
+
+
+
