@@ -1,0 +1,13 @@
+def donatı_oranı(p, fctd=1.15, fyd=365, fcd=16.7, a=0, bw=25):
+    min_donatı = 0.8 * (fctd / fyd)
+
+    print("Minimum Donatı = ", min_donatı)
+    dengeli_donatı = 0.85 * 0.80 * (fcd / fyd) * (700 / (700 + fyd))
+    print("Dengeli Donatı oranı = ", dengeli_donatı)
+    max_donatı = 0.85 * dengeli_donatı
+    print("Maksimum Donatı Alanı = ", max_donatı)
+    if p > min_donatı and p < max_donatı:
+        return p
+    else:
+        print("Maksimum Donatı Alanını Aştınız Ya da Donatı Alanı Yetersiz")
+        return None
